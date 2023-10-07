@@ -1,0 +1,47 @@
+body {
+  width: 100%;
+  background-color: #CAF0F8;
+  display: flex;
+  justify-content: center;
+  font-family: Reem Kufi Fun;
+}
+
+.btn-1 {
+  background-color: #44a2b3;
+  color: #03045E;
+  border: none;
+  margin-bottom: 20px;
+}
+.btn-1:hover {
+  background-color: #03045E;
+  color: #44a2b3;
+}
+
+.div-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.div-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+
+header {
+  color: #03045E;
+  font-size: 36px;
+  font-family: Permanent Marker;
+}
+
+.li-1 {
+  border-radius: 10px;
+  margin: 5px;
+}
+
+/*# sourceMappingURL=styles.css.map */

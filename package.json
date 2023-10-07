@@ -1,0 +1,17 @@
+{
+  "name": "aula-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "npx live-server",
+    "compile:sass": "npx sass sass/main.scss css/styles.css -w",
+    "compile:typescript": "npx tsc -w",
+    "json:server": "npx json-server -p 3500 ./data/lista-alunos.json -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
