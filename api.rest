@@ -1,4 +1,11 @@
 
-GET http:localhost:3500/listaAlunos HTTP/1.1
 
-    ###
+GET http://127.0.0.1:3500/listaAlunos HTTP/1.1
+
+###
+
+GET http://127.0.0.1:3500/listaMaterias HTTP/1.1
+
+###
+
+GET http://127.0.0.1:3500/listaTurmas HTTP/1.1

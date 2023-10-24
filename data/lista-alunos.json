@@ -1,9 +1,25 @@
 {
+
+"listaTurmas":[
+  {
+    "id": 1,
+    "name": "Turma A"
+  },
+  {
+    "id": 2,
+    "name": "Turma B"
+  },
+  {
+    "id": 3,
+    "name": "Turma C"
+  }
+],
+
   "listaAlunos": [
     {
       "id": 1,
       "nome": "Carlos Souza",
-      "turma": "A",
+      "turma": "1",
       " notas": {
         "matematica": [8.5, 7.2, 6, 5.6],
         " portugues": [5.4, 6.8, 5.3, 6.3],
@@ -26,7 +42,7 @@
     {
       "id": 2,
       "nome": "Mariana Rocha",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [8.2, 6.2, 7.4, 7.2],
         "portugues": [7.5, 9.4, 7.1, 9.1],
@@ -49,7 +65,7 @@
     {
       "id": 3,
       "nome": "Maria Oliveira",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [6.1, 8.3, 9.1, 6.9],
         "portugues": [9.4, 6.6, 6.8, 9.2],
@@ -72,7 +88,7 @@
     {
       "id": 4,
       "nome": "Ana Silva",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [8.1, 7.4, 9.3, 6.7],
         "portugues": [6.1, 5.5, 6.9, 5.2],
@@ -95,7 +111,7 @@
     {
       "id": 5,
       "nome": "Carlos Pereira",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [6.5, 6.8, 5, 6.9],
         "portugues": [8.6, 7.4, 6.3, 9.8],
@@ -118,7 +134,7 @@
     {
       "id": 6,
       "nome": "Pedro Souza",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [7.2, 8, 7.6, 5.4],
         "portugues": [6.4, 7.3, 7, 5.1],
@@ -141,7 +157,7 @@
     {
       "id": 7,
       "nome": "Fernanda Pereira",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [7.7, 9.2, 8.4, 9.3],
         "portugues": [7, 4, 5.4, 5.9],
@@ -164,7 +180,7 @@
     {
       "id": 8,
       "nome": "Julia Silva",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [4.9, 6.6, 5.9, 4.5],
         "portugues": [4.1, 4.2, 6, 4.7],
@@ -187,7 +203,7 @@
     {
       "id": 9,
       "nome": "Pedro Lima",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [8, 8.5, 5.6, 5.8],
         "portugues": [9.3, 9.3, 7.5, 8.3],
@@ -210,7 +226,7 @@
     {
       "id": 10,
       "nome": "Julia Pereira",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [5.9, 5.2, 6.3, 6.5],
         "portugues": [5.2, 4.2, 6.9, 4.6],
@@ -233,7 +249,7 @@
     {
       "id": 11,
       "nome": "Ana Oliveira",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [8.2, 9.2, 8, 6.9],
         "portugues": [4.6, 5.8, 5.7, 5.7],
@@ -256,7 +272,7 @@
     {
       "id": 12,
       "nome": "Ana Santos",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [3.9, 2.5, 3.7, 3.6],
         "portugues": [4.2, 4.3, 4.1, 5.6],
@@ -279,7 +295,7 @@
     {
       "id": 13,
       "nome": "Maria Santos",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [5.6, 6.8, 5.4, 4.1],
         "portugues": [4.9, 4.5, 3.4, 4.7],
@@ -302,7 +318,7 @@
     {
       "id": 14,
       "nome": "Gustavo Costa",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [6, 5.5, 6.1, 5.3],
         "portugues": [5.8, 5, 6, 5.9],
@@ -325,7 +341,7 @@
     {
       "id": 15,
       "nome": "Pedro Santos",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [7.6, 7.4, 7.3, 6.7],
         "portugues": [5.2, 8.1, 7, 6.3],
@@ -348,7 +364,7 @@
     {
       "id": 16,
       "nome": "Lucas Almeida",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [6.3, 8.2, 5.3, 7.9],
         "portugues": [4.3, 4.4, 6.6, 4.2],
@@ -371,7 +387,7 @@
     {
       "id": 17,
       "nome": "João Pereira",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [6.3, 7.5, 5.6, 8.6],
         "portugues": [2.8, 2.6, 2.7, 3.3],
@@ -394,7 +410,7 @@
     {
       "id": 18,
       "nome": "Ana Almeida",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [6.5, 7.6, 8.5, 6.1],
         "portugues": [5.6, 9, 8.5, 5.1],
@@ -417,7 +433,7 @@
     {
       "id": 19,
       "nome": "Fernanda Rocha",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [7.4, 6.4, 6.6, 6.6],
         "portugues": [8.4, 6.9, 6.3, 8.8],
@@ -440,7 +456,7 @@
     {
       "id": 20,
       "nome": "Julia Ferreira",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [4.1, 6.1, 5.1, 4.2],
         "portugues": [5.1, 5.1, 6.3, 5.5],
@@ -463,7 +479,7 @@
     {
       "id": 21,
       "nome": "Maria Rocha",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [5.6, 5.9, 6.6, 5.8],
         "portugues": [7.1, 8.6, 8.3, 6],
@@ -486,7 +502,7 @@
     {
       "id": 22,
       "nome": "Carlos Rocha",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [7.6, 7.8, 9, 9.4],
         "portugues": [8.7, 8.1, 8.2, 9.6],
@@ -509,7 +525,7 @@
     {
       "id": 23,
       "nome": "Gustavo Santos",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [9.5, 6.3, 7.7, 9.6],
         "portugues": [6.2, 6.6, 5.1, 5.9],
@@ -532,7 +548,7 @@
     {
       "id": 24,
       "nome": "Pedro Ferreira",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [7.1, 6.4, 7.3, 6.4],
         "portugues": [9.3, 7.1, 7.3, 9.6],
@@ -555,7 +571,7 @@
     {
       "id": 25,
       "nome": "Julia Almeida",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [5.6, 4.9, 5.8, 4],
         "portugues": [5, 4.3, 5.8, 5.2],
@@ -578,7 +594,7 @@
     {
       "id": 26,
       "nome": "João Ferreira",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [9, 10, 8, 7.3],
         "portugues": [8.4, 9.8, 6.8, 6.4],
@@ -601,7 +617,7 @@
     {
       "id": 27,
       "nome": "Lucas Oliveira",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [9.8, 9.3, 7.5, 9.5],
         "portugues": [6.6, 5, 8, 6.3],
@@ -624,7 +640,7 @@
     {
       "id": 28,
       "nome": "João Souza",
-      "turma": "A",
+      "turma": "1",
       "notas": {
         "matematica": [8.1, 6.4, 7.8, 6.9],
         "portugues": [7.3, 8.3, 8.2, 9.7],
@@ -647,7 +663,7 @@
     {
       "id": 29,
       "nome": "Fernanda Costa",
-      "turma": "B",
+      "turma": "2",
       "notas": {
         "matematica": [5.3, 7.7, 8.5, 8.7],
         "portugues": [7.2, 8.2, 6.3, 8.6],
@@ -670,7 +686,7 @@
     {
       "id": 30,
       "nome": "Fernanda Oliveira",
-      "turma": "C",
+      "turma": "3",
       "notas": {
         "matematica": [6.6, 5.2, 5, 4.6],
         "portugues": [6, 6.3, 4.9, 4.7],
@@ -700,4 +716,6 @@
     "quimica": "Química",
     "linguas": "Línguas"
   }
+
 }
+

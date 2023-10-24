@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "npx live-server",
-    "compile:sass": "npx sass sass/main.scss css/styles.css -w",
+    "compile:sass:main": "npx sass sass/main.scss css/styles.css -w",
+    "compile:sass": "npx sass sass/details.scss css/details.css -w",
     "compile:typescript": "npx tsc -w",
-    "json:server": "npx json-server -p 3500 ./data/lista-alunos.json -w",
+    "json:server": "npx json-server -p 3500 -H 127.0.0.1 ./data/lista-alunos.json -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

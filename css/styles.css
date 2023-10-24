@@ -33,6 +33,13 @@ body {
   height: 70px;
 }
 
+.div-3 {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-bottom: 15px;
+}
+
 header {
   color: #03045E;
   font-size: 36px;
@@ -42,6 +49,11 @@ header {
 .li-1 {
   border-radius: 10px;
   margin: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #03045E;
 }
 
 /*# sourceMappingURL=styles.css.map */
