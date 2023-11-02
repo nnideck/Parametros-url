@@ -42,11 +42,30 @@ interface Iturmas {
   name: string;
 }
 
+//*crio uma interface que permitirá eu combinar diferentes filtros no momento da busca
+interface Ifilter {
+  classe: number;
+  name: string;
+  id: number;
+}
+
+//*crio uma let que receberá o valor de cada filtro (inputs)
+let filter:Ifilter = {
+  classe: 0 ,
+  name: "",
+  id: 0
+}
+
 
 //* já faço a seleção dos elementos com os quais terei interação no HTML
 const listUl = document.querySelector(".list-1");
 const button = document.querySelector("button");
 const select = document.querySelector(".class-select");
+const inputName = document.querySelector(".input");
+const inputId = document.querySelector(".inputId");
+const buttonClear = document.querySelector(".clear");
+const spanError = document.querySelector(".span-1")
+
 
 //*crio uma let vazia, que será preenchida na função a seguir
 let classList: Iturmas[] = [];
@@ -90,16 +109,15 @@ async function populateSelect(list: Iturmas[]) {
 function getSelect(event: Event) {
   //*guardo numa variável a informação referente ao ID (value) da seleção feita (option). O value eu mesma setei, ao criar a option na função acima
   const classID = event.target!.value;
-  //*se o value é 0, ou seja, quando está selecionada a option "All". Este value 0 eu inputei direto no HTML, junto do primeiro option
-  if (classID == 0) {
-    //*invoco a função getStudents sem passar nenhum parametro pra ela, pois quero mostrar a lista completa
-    getStudents();
-  //* se o value é diferente de 0
-  } else {
-    //*invoco a função informando como parâmetro o id que acabei de coletar
-    getStudents(classID);
+  //* caso haja algum valor na mudança do select
+  if(event){
+    //*mudo a classe da minha let filter (criada lá em cima) com o valor do id da option
+    filter.classe = classID
+  } 
+    //*invoco a função getStudent informando como parâmetro o pacote inteiro do filtro. Isso permite que eu "acumule" as informações obtidas nos filtros
+  getStudents(filter)
   }
-}
+
 
 //*OPÇÃO 2: função para pegar as informações dos dados do option, quando clico no botão
 function buttonGetSelect() {
@@ -116,29 +134,77 @@ function buttonGetSelect() {
   }
 }
 
-//*Aqui escolhi a Opção 2. Portanto, linkei ao click do button invocar a função
-button!.addEventListener("click", buttonGetSelect);
-
-//*aqui no caso de escolher a Opção 1. Linko a função à atividade "change" do select
-//select?.addEventListener("change", getSelect)
+//*Aqui escolhi a Opção 1 Linko a função à atividade "change" do select
+select?.addEventListener("change", getSelect)
 
 
-//*crio uma função para carregar a lista de alunos, que recebe como parâmetro a informação inputada no select
-//*deixo como default que o parametro a receber será vazio - justamento pois posso ou não recebê-lo
-async function getStudents(param = "") {
+//*  aqui no caso de escolher a Opção 2. Portanto, linkei ao click do button invocar a função
+//button!.addEventListener("click", buttonGetSelect);
+
+//* crio uma função para coletar o valor indicado no campo do nome do aluno
+function getInput(nameInput){
+  //*guardo o value deste input (texto obtido) em uma variável
+  const text = (inputName as HTMLInputElement).value;
+  //*caso tenha recebido algum valor
+if(nameInput){
+  //*mudo o name da minha let filter (criada lá em cima) com o texto obtido no input
+  filter.name = text
+}
+//*invoco a função getStudent informando como parâmetro o pacote inteiro do filtro - a fim de acumular as infos já inseridas
+getStudents(filter)
+}
+//* linko a função getInput ao campo lá do HTML. Tipo de interação (search)
+inputName?.addEventListener('search', getInput)
+
+
+//* crio uma função para coletar o valor indicado no campo do id do aluno
+function getId(idInput){
+  //*guardo o value deste input (texto obtido) em uma variável
+  const text = (inputId as HTMLInputElement).value;
+  //*caso tenha recebido algum valor
+if(idInput){
+  //*mudo o name da minha let filter (criada lá em cima) com o texto obtido no input, mudando ele para number (conforme interface)
+  filter.id = parseInt(text)
+} 
+//*invoco a função getStudent informando como parâmetro o pacote inteiro do filtro - a fim de acumular as infos já inseridas
+getStudents(filter)
+}
+//* linko a função getInput ao campo lá do HTML. Tipo de interação (search)
+inputId?.addEventListener('search', getId)
+
+
+//*crio uma função para carregar a lista de alunos, que recebe como parâmetro uma informação do tipo Ifilter
+//* aqui já divido as infos recebida (classe, name, id) para utiliza-las separadamente em seguida
+//*deixo como default que o parametro a receber será vazio - justamento pois posso ou não recebê-lo (no caso de carregar a lista completa)
+async function getStudents({classe, name, id}: Ifilter | param = "") {
   //*crio uma let com o endereço da API, pois sei que ela poderá ser modificada
   let url = `http://localhost:3500/listaAlunos?_sort=nome`;
-  //* SE alguma informação veio como parâmetro
-  if (param) {
-    //*acrescento na let as informações para que o endereço da API já filtre o que preciso. Aqui to colocando que a turma deverá ser a indicada no select
-    url += `&turma=${param}`;
+  //* SE alguma informação veio como parâmetro na classe
+  if (classe != 0) {
+    //*acrescento na let as informações para que o endereço da API já filtre o que preciso
+    url += `&turma=${classe}`;
   }
+  //* SE alguma informação veio como parâmetro no name
+  if (name) {
+    //*acrescento na let as informações para que o endereço da API já filtre o que preciso
+    url += `&nome_like=${name}`
+  }
+   //* SE alguma informação veio como parâmetro no id
+  if (id != 0) {
+    //*acrescento na let as informações para que o endereço da API já filtre o que preciso
+    url += `&id=${id}`;
+  }
+
   //*inicio meu fetch - utilizando a URL modificada ou não
   const list = await fetch(url);
   const listStudents = await list.json();
+
+
+      chargeList(listStudents)
+
   
   //*passo minha lista de estudantes recebidas (filtradas ou não) para a função que as carregará na tela
-  chargeList(listStudents);
+  //chargeList(listStudents);
 }
 
 //*função para carregar na tela as informações dos estudantes
@@ -150,18 +216,17 @@ async function chargeList(students: Ialuno[]) {
   if (students) {
     //*faço um loop por todos os alunos (objects dentro do array)
     for (const student of students) {
-      //!guardo numa variável a informação da turma, considerando a função FIND.
+      //*guardo numa variável a informação da turma, considerando a função FIND.
       //* Ou seja: faço uma busca na lista de turmas e lanço a função:
       //* (t) => t.id == student.turma, que significa: quando o id (number) do t (cada objeto contido no array da lista de turmas) for igual ao number indicado na
       //* turma do estudante da rodada, retornarei TRUE para o find. O find coleta o OBJETO do array cujo id corresponde à turma do aluno.
-      //!por que nao consigo usar algo como enum aqui?
       const classe = classList.find((t) => t.id == student.turma);
   //*guardo numa variável a informação do nome do aluno
       const name = student.nome;
       //*guardo numa variável a informação do id do aluno
       const id = student.id;
-      //* aqui dito que para todos estudantes encontrados do loop serão inseridos no array que criei no início da função o texto tem HTML referente à um novo <li> já com todos os atributos settados
-      //* no texto do HTML crio referência para o id e nome do aluno, e o nome da classe, que coletei no find acima
+      //* aqui dito que para todos estudantes encontrados do loop serão inseridos no array, que criei no início da função, o texto em HTML referente à um novo <li> já com todos os atributos settados
+      //* no texto do HTML crio referência para o id e nome do aluno, e o nome da classe, que coletei no find acima - e também para o href de details da página derivada
       //*Uso "+=" pois sempre ADICIONAREI o texto. Usando só "=" eu substituiria
       studentsList += `<li class="list-group-item d-flex justify-content-between align-items-start li-1">
   <div class="ms-2 me-auto">
@@ -177,17 +242,12 @@ async function chargeList(students: Ialuno[]) {
   listUl!.innerHTML = studentsList;
 }
 
+//*função para o botão de limpar todos os campos
+function clearAll(){
+(inputName as HTMLInputElement).value = "";
+(select as HTMLInputElement).value = "0";
+(inputId as HTMLInputElement).value = "";
+getStudents()
+}
+buttonClear?.addEventListener("click", clearAll)
 
-//* exercicio filtros
-//* adicione um campo para busca por nome e um select para selecionar a turma na tela de listagem
-//* crie uma lista de turmas dentro do nosso arquivo json
-//* substitua as turmas de cada aluno pelo id da turma correspondente na lista de turmas
-//* cria uma função para carregar a lista de turmas
-//* crie uma função para popular o select com as turmas carregadas
-//* guarde a lista de turmas carregada em uma variavel separada para ser usada mais tarde
-//* carregue a lista de estudantes apos carregar a lista de turmas
-//* ajuste a função de mostrar a lista de estudantes para mostrar a turma correspondente
-//* crie uma função para ser chamada sempre que o select de turma for alterado
-//* link essa função ao select (pode fazer isso dentro da função que popula o selct)
-//* pegue o valor selecionado no select
-//* passe esse valor do select como filtro para trazer a lista de alunos (de acordo com a turma selecionada)

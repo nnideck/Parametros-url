@@ -56,4 +56,10 @@ a {
   color: #03045E;
 }
 
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /*# sourceMappingURL=styles.css.map */

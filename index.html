@@ -39,10 +39,19 @@
         <div>
           <label for="name" title="Name">Student Name:</label>
           <input
-            class="form-control"
+            class="form-control input"
             id="name"
-            type="text"
+            type="search"
             name="name"
+            value=""
+            placeholder="Type here"
+          />
+          <label for="id" title="Id">Student Id:</label>
+          <input
+            class="form-control inputId"
+            id="id"
+            type="search"
+            name="id"
             value=""
             placeholder="Type here"
           />
@@ -54,12 +63,15 @@
           </select>
         </div>
       </div>
-      <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary btn-1" type="button">
+      <div class="gap-2 d-md-block btns">
+        <!--  <button class="btn btn-primary btn-1" type="button" disabled>
           Show Student
+        </button> -->
+        <button class="btn btn-primary btn-1 clear" type="button">
+          Clear all
         </button>
       </div>
-
+      <div><span class="span-1"></span></div>
       <div class="div-3">
         <ul class="list-group list-group-flush list-1"></ul>
       </div>
