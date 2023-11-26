@@ -63,6 +63,7 @@ if (id == studentDetail.id){
 const notas: Inotas = {
   matematica: studentDetail.notas.matematica,
   portugues: studentDetail.notas.portugues,
+  historia: studentDetail.notas.historia,
   geografia:studentDetail.notas.geografia,
   fisica: studentDetail.notas.fisica,
   quimica: studentDetail.notas.quimica,
@@ -72,6 +73,7 @@ const notas: Inotas = {
 const faltas: Ifaltas = {
   matematica: studentDetail.faltas.matematica,
   portugues: studentDetail.faltas.portugues,
+  historia: studentDetail.faltas.historia,
   geografia:studentDetail.faltas.geografia,
   fisica: studentDetail.faltas.fisica,
   quimica: studentDetail.faltas.quimica,
@@ -89,19 +91,21 @@ h5Title!.innerHTML =
 ` <b>Notas</b>:
 <br>Matemática: ${notas.matematica}</br>
  Português: ${notas.portugues}
- <br>Geografia: ${notas.geografia}</br>
- Física: ${notas.fisica}
- <br>Química: ${notas.quimica}</br>
- Línguas: ${notas.linguas}`
+<br>História: ${notas.historia}</br>
+ Geografia: ${notas.geografia}
+ <br>Física: ${notas.fisica}</br>
+Química: ${notas.quimica}
+ <br>Línguas: ${notas.linguas}</br>`
 
  fourInfo!.innerHTML =
 `<b>Faltas</b>: 
  <br>Matemática: ${faltas.matematica}</br>
  Português: ${faltas.portugues}
- <br>Geografia: ${faltas.geografia}</br>
- Física: ${faltas.fisica}
- <br>Química: ${faltas.quimica}</br>
- Línguas: ${faltas.linguas}`
+<br>História: ${faltas.historia}</br>
+ Geografia: ${faltas.geografia}
+ <br>Física: ${faltas.fisica}</br>
+ Química: ${faltas.quimica}
+ <br>Línguas: ${faltas.linguas}</br>`
   
 
 }
@@ -112,13 +116,15 @@ else {
 
 
 function nextDetail() {
- nextButton.href = `details.html?id=${urlId + 1}`
+ const next: string = `details.html?id=${urlId + 1}`
+ nextButton!.setAttribute ("href", next) 
 }
 
 nextButton!.addEventListener("click", nextDetail)
 
 function prevDetail() {
-  prevButton.href = `details.html?id=${urlId - 1}`
+  const prev : string = `details.html?id=${urlId - 1}`
+  prevButton!.setAttribute ("href", prev)
  }
  
  prevButton!.addEventListener("click", prevDetail)

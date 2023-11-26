@@ -65,6 +65,7 @@ const inputName = document.querySelector(".input");
 const inputId = document.querySelector(".inputId");
 const buttonClear = document.querySelector(".clear");
 const spanError = document.querySelector(".span-1")
+const pagination = document.querySelector(".nav-pagination")
 
 
 //*crio uma let vazia, que será preenchida na função a seguir
@@ -97,22 +98,24 @@ async function populateSelect(list: Iturmas[]) {
       //*informo que o texto deste option será o nome da turma correspondente
       newOption.text = className;
       //* informo que o value deste option será o id da turma correspondente
-      newOption.value = obj.id;
+      newOption.value = String(obj.id);
       //*insiro meu option criado como append child do select existente no html
       select!.appendChild(newOption);
     }
   }
+  //*para chamar a lista de alunos completa assim que abro o site, sem depender dos filtros
+  getStudents(filter)
 }
 
 //* OPÇÃO 1: função para pegar a informação da Turma selecionada vinda do select quando mudo a seleção do select
 //*essa mudança de seleção é definido como um tipo 'event'
 function getSelect(event: Event) {
   //*guardo numa variável a informação referente ao ID (value) da seleção feita (option). O value eu mesma setei, ao criar a option na função acima
-  const classID = event.target!.value;
+  const classID = (event.target! as HTMLInputElement) .value;
   //* caso haja algum valor na mudança do select
   if(event){
     //*mudo a classe da minha let filter (criada lá em cima) com o valor do id da option
-    filter.classe = classID
+    filter.classe = parseInt(classID)
   } 
     //*invoco a função getStudent informando como parâmetro o pacote inteiro do filtro. Isso permite que eu "acumule" as informações obtidas nos filtros
   getStudents(filter)
@@ -122,15 +125,16 @@ function getSelect(event: Event) {
 //*OPÇÃO 2: função para pegar as informações dos dados do option, quando clico no botão
 function buttonGetSelect() {
   //*guardo numa variável a informação referente ao ID (value) da seleção feita (option). O value eu mesma setei, ao criar a option na função acima
-  const classID = select!.value;
+  const classID: number = parseInt((select! as HTMLInputElement).value);
   //*se o value é 0, ou seja, quando está selecionada a option "All". Este value 0 eu inputei direto no HTML, junto do primeiro option
   if (classID == 0) {
      //*invoco a função getStudents sem passar nenhum parametro pra ela, pois quero mostrar a lista completa
-    getStudents();
+    getStudents(filter);
       //* se o value é diferente de 0
   } else {
         //*invoco a função informando como parâmetro o id que acabei de coletar
-    getStudents(classID);
+        filter.classe = classID
+    getStudents(filter);
   }
 }
 
@@ -176,9 +180,9 @@ inputId?.addEventListener('search', getId)
 //*crio uma função para carregar a lista de alunos, que recebe como parâmetro uma informação do tipo Ifilter
 //* aqui já divido as infos recebida (classe, name, id) para utiliza-las separadamente em seguida
 //*deixo como default que o parametro a receber será vazio - justamento pois posso ou não recebê-lo (no caso de carregar a lista completa)
-async function getStudents({classe, name, id}: Ifilter | param = "") {
+async function getStudents({classe, name, id}: Ifilter , page = 1 , param: any = "") {
   //*crio uma let com o endereço da API, pois sei que ela poderá ser modificada
-  let url = `http://localhost:3500/listaAlunos?_sort=nome`;
+  let url = `http://localhost:3500/listaAlunos?_sort=nome&_limit=7&_page=${page}`;
   //* SE alguma informação veio como parâmetro na classe
   if (classe != 0) {
     //*acrescento na let as informações para que o endereço da API já filtre o que preciso
@@ -194,13 +198,13 @@ async function getStudents({classe, name, id}: Ifilter | param = "") {
     //*acrescento na let as informações para que o endereço da API já filtre o que preciso
     url += `&id=${id}`;
   }
-
   //*inicio meu fetch - utilizando a URL modificada ou não
   const list = await fetch(url);
   const listStudents = await list.json();
-
+  const totalCount = parseInt(list.headers.get('X-Total-Count') || "0");
 
       chargeList(listStudents)
+      createPagination(totalCount, page)
 
   
   //*passo minha lista de estudantes recebidas (filtradas ou não) para a função que as carregará na tela
@@ -242,12 +246,68 @@ async function chargeList(students: Ialuno[]) {
   listUl!.innerHTML = studentsList;
 }
 
+function createPagination (totalCount: number, actualPage: number){
+ const totalPages = Math.ceil(totalCount/7)
+
+ const ulPagination = document.createElement ("ul")
+ ulPagination.classList.add ("pagination")
+
+ const liPrev = document.createElement("li");
+ const aPrev = document.createElement("a")
+ aPrev.setAttribute ("href", "#");
+ aPrev.classList.add("page-link")
+ liPrev.classList.add ("page-item")
+ aPrev.textContent = "Previous"
+ if (actualPage > 1){
+  liPrev.onclick = () => {getStudents(filter,actualPage - 1)}
+ }
+ liPrev.appendChild(aPrev)
+ ulPagination.appendChild(liPrev)
+
+for ( let i = 1 ; i <= totalPages; i++){
+  const liPage = document.createElement("li");
+  const aPage = document.createElement("a")
+  aPage.setAttribute ("href", "#");
+  aPage.classList.add("page-link")
+  liPage.classList.add("page-item");
+  aPage.textContent = `${i}`
+  liPage.appendChild(aPage)
+  ulPagination.appendChild(liPage)
+  if (i != actualPage){
+    liPage.onclick = () => {getStudents(filter, i)}
+   }
+   else {aPage.classList.add("active")}
+ } 
+ const liNext = document.createElement("li");
+ const aNext = document.createElement("a")
+ aNext.setAttribute ("href", "#");
+ aNext.classList.add("page-link")
+ liNext.classList.add("page-item");
+ aNext.textContent = "Next"
+ if (actualPage < totalPages){
+  liNext.onclick = () => {getStudents(filter,actualPage + 1)}
+ }
+ liNext.appendChild(aNext)
+ ulPagination.appendChild(liNext)
+
+ 
+ pagination!.innerHTML = ""
+ pagination!.appendChild(ulPagination)
+
+}
+
+
+
 //*função para o botão de limpar todos os campos
 function clearAll(){
 (inputName as HTMLInputElement).value = "";
 (select as HTMLInputElement).value = "0";
 (inputId as HTMLInputElement).value = "";
-getStudents()
+filter = {
+  classe: 0,
+  name: "",
+  id: 0}
+getStudents(filter)
 }
 buttonClear?.addEventListener("click", clearAll)
 
