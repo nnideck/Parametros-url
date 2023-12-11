@@ -118,7 +118,7 @@ function getInput(nameInput) {
     getStudents(filter);
 }
 //* linko a função getInput ao campo lá do HTML. Tipo de interação (search)
-inputName === null || inputName === void 0 ? void 0 : inputName.addEventListener('search', getInput);
+inputName.addEventListener('search', getInput);
 //* crio uma função para coletar o valor indicado no campo do id do aluno
 function getId(idInput) {
     //*guardo o value deste input (texto obtido) em uma variável

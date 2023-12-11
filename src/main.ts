@@ -146,7 +146,7 @@ select?.addEventListener("change", getSelect)
 //button!.addEventListener("click", buttonGetSelect);
 
 //* crio uma função para coletar o valor indicado no campo do nome do aluno
-function getInput(nameInput){
+function getInput(nameInput: any){
   //*guardo o value deste input (texto obtido) em uma variável
   const text = (inputName as HTMLInputElement).value;
   //*caso tenha recebido algum valor
@@ -158,11 +158,11 @@ if(nameInput){
 getStudents(filter)
 }
 //* linko a função getInput ao campo lá do HTML. Tipo de interação (search)
-inputName?.addEventListener('search', getInput)
+inputName!.addEventListener ('search', getInput)
 
 
 //* crio uma função para coletar o valor indicado no campo do id do aluno
-function getId(idInput){
+function getId(idInput: any){
   //*guardo o value deste input (texto obtido) em uma variável
   const text = (inputId as HTMLInputElement).value;
   //*caso tenha recebido algum valor
@@ -215,7 +215,7 @@ async function getStudents({classe, name, id}: Ifilter , page = 1 , param: any =
 //* o que recebo como parâmetro é uma lista do tipo array de Ialuno
 async function chargeList(students: Ialuno[]) {
   //*crio uma let que será preenchida a seguir
-  let studentsList = [];
+  let studentsList: any = [];
   //*checagem: SE recebi a lista
   if (students) {
     //*faço um loop por todos os alunos (objects dentro do array)
